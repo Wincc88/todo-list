@@ -1,0 +1,19 @@
+body {
+    background-color: whitesmoke;
+}
+#topDiv {
+    font-size: 20px;
+    
+    color: white;
+    margin-bottom: 20px;
+    background-color:rgb(23, 163, 23);
+    text-align: center;
+    padding: 10px;
+}
+
+#beforeTopdiv {
+    height: 40px;
+    border: 2px solid black;
+    margin-bottom: 5px;
+
+}
