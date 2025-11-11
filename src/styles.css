@@ -9,6 +9,7 @@ body {
 }
 
 #topIntro {
+
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -35,17 +36,68 @@ body {
 }
 
 #beforeTopdiv {
-    height: 40px;
+    
     border: 2px solid black;
-    margin-bottom: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
 }
 
-.beforeTopDiv taskInput[type="text"], titleInput[type="text"] {
-    width: 40%;
-    height: 60px;
+#inputDetailsDiv, #inputTitleDiv {
+    margin-bottom: 10px;
+    margin-top: 10px; 
+    border: 2px solid rgb(185, 11, 11);
+    padding: 5px;
+    margin: 5px;
+
+}
+
+#taskInput[type="text"], #titleInput[type="text"] {
+    
     font-size: 16px;
     padding: 5px;
     border: 2px solid black;
     
+}
+
+#taskInput {
+    height: 160px;
+    width: 30%;
+}
+#titleInput {
+    width: 25%;
+    height: 60px;
+}
+
+#editDelDiv {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(212, 237, 73);
+    padding: 10px;  
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+#editButton, #deleteButton {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    
+}
+
+#editButton {
+    background-color: rgba(200, 113, 20, 0.76);
+    
+}
+#deleteButton {
+    background-color: rgba(218, 27, 27, 0.91);
+}
+
+#editButton:hover, #deleteButton:hover {
+    opacity: 0.9;
 }
