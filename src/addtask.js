@@ -76,7 +76,7 @@ export function addTask() {
             } else {
                 editDelDiv.style.display = 'none';
             }
-  });
+         });
         
 
 }
