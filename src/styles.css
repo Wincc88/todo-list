@@ -49,9 +49,13 @@ body {
 
 #beforeTopdiv {
     
-    border: 2px solid black;
+    border: 2px solid lightcoral;
     margin-top: 15px;
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -59,57 +63,99 @@ body {
     
     margin-bottom: 10px;
     margin-top: 10px; 
-    border: 2px solid rgb(185, 11, 11);
+    border: 2px solid lightgreen;
     padding: 5px;
     margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
     
-    
-
 }
+
 #inputDetailsDiv {
     height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 
 }
 
 #inputTitleDiv {
-    align-items: center;
+    
     height: 100px;
-    justify-content: center;
+   
+    
 }
 
-#taskInput[type="text"], #titleInput[type="text"] {
-    
+#titleInput, #inputDetailsDiv textarea {
+    width: 95%;
+    padding: 10px;
     font-size: 16px;
-    padding: 5px;
-    border: 2px solid black;
-    
-}
-
-#taskInput {
-    height: 110px;
-    width: 40%;
-     background-color: aquamarine;
-
+    background-color: yellow; 
+    border: 2px solid gray;
+    border-radius: 5px;
+                                         /** target bigger parent class so it does not clash with other div's textaera 
+                                           -- remove textarea from snippet to make it a div  --- so no need  **/
+    margin-left: 5px;
+    margin-right: 8px;
 }
 
 #titleInput {
-    width: 25%;
-    height: 60px;
+    width: 30%;
 }
+
+textarea:focus, #titleInput:focus {
+    
+    border-color: 5px solid blue;
+    outline: none;    /** helps with overriding browser specificity **/
+    box-shadow: 0 0 0 1px #185ae8; /** covers browser borders **/
+}
+
+
+
+
 
 #editDelDiv {
     margin-top: 10px;
     margin-bottom: 20px;
-    border: 2px solid rgb(212, 237, 73);
+    margin-left: 2px;
+    border: 2px solid green;
     padding: 10px;  
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    
-    
+
+}
+
+.checkedbtnClass {
+    margin-right: auto;
+    cursor: pointer;
+    border: 2px solid yellow;
+}
+
+#checkedOrNot {
+    width: 20px;
+    height: 20px;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.snippetClass {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 18px;
+    border: 2px solid orange;
+    height: 40px;
+    background-color: lightblue;
+   
+}
+
+.editDelDivtoAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    border: 2px solid yellow;
 }
 
 
@@ -124,12 +170,7 @@ body {
     
 }
 
-#checkedOrNot {
-    width: 20px;
-    height: 20px;
-    margin-right: auto;
-    cursor: pointer;
-}
+
 
 #editButton {
     background-color: rgba(200, 113, 20, 0.76);

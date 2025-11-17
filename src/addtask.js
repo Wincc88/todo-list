@@ -24,9 +24,9 @@ export function addTask() {
                         
 
                                 const inputDetails = document.createElement('textarea');
-                                // input.type = "text";
+                                // input.type = "text";\
+                                        inputDetails.className = "detailsClass";
                                         inputDetails.id = "taskInput";
-                                        inputDetails.name = "details";
                                         inputDetails.required = true;
                                         inputDetails.placeholder = "Add a new task. \nDrag cursor to expand box."; 
                                 
@@ -40,7 +40,7 @@ export function addTask() {
 
                                 const inputTitle = document.createElement('input');
                                         inputTitle.id = "titleInput";
-                                        inputTitle.name = "title";
+                                        inputTitle.className = "title";
                                         inputTitle.required = true;
                                         inputTitle.placeholder = "Add a Title"; 
                                     
@@ -69,34 +69,51 @@ export function addTask() {
         editDelDiv.className = 'editDeleteClass';
         editDelDiv.style.display = 'none';
                        
-                         const checkBoxAll = document.createElement('input');
-                                checkBoxAll.type = "checkbox";
-                                checkBoxAll.id = "checkedOrNot";
-                                checkBoxAll.name = "checkedbtn";
 
-                        const detailTitles = document.createElement('textarea');
+                         const checkBoxAll = document.createElement('div');
+                                checkBoxAll.id = "checkedOrNotId";
+                                checkBoxAll.className = "checkedbtnClass";
+
+                                               const checkBoxinDiv = document.createElement('input');
+                                                checkBoxinDiv.type = "checkbox";
+                                                checkBoxinDiv.id = "checkedOrNot";
+                                                checkBoxinDiv.className = "checkedbtn";
+
+                        checkBoxAll.appendChild(checkBoxinDiv);
+
+                        const snippetDetails = document.createElement('div');
                                 // input.type = "text";
-                                        inputDetails.id = "detailsCollected";
-                                        inputDetails.name = "details";
+                                        snippetDetails.id = "snippetId";
+                                        snippetDetails.className = "snippetClass";
                         
-                         const editButton = document.createElement('button');
-                                editButton.id = "editButton";
-                                editButton.name = "edit";
-                                editButton.type = "button";
-                                editButton.textContent = "Edit";
+                        const editbtnDIv = document.createElement('div');
+                                editbtnDIv.id = "editDelIdToAdd";
+                                editbtnDIv.className = "editDelDivtoAdd";
 
-                        const deleteButton = document.createElement('button');
-                                deleteButton.id = "deleteButton";
-                                deleteButton.name = "delete";
-                                deleteButton.type = "button";
-                                deleteButton.textContent = "Delete";
+                                               const editButton = document.createElement('button');
+                                                editButton.id = "editButton";
+                                                editButton.className = "editbtn";
+                                                editButton.type = "button";
+                                                editButton.textContent = "Edit";
+
+                        editbtnDIv.appendChild(editButton);
+
+                                                const deleteButton = document.createElement('button');
+                                                deleteButton.id = "deleteButton";
+                                                deleteButton.className = "deletebtn";
+                                                deleteButton.type = "button";
+                                                deleteButton.textContent = "Delete";
+
+                        editbtnDIv.appendChild(deleteButton);
 
                     editDelDiv.appendChild(checkBoxAll);
-                    editDelDiv.appendChild(detailTitles);
-                    editDelDiv.appendChild(editButton);
-                    editDelDiv.appendChild(deleteButton);
+                    editDelDiv.appendChild(snippetDetails);
+                    editDelDiv.appendChild(editbtnDIv);
+                   
+                         // editDelDiv.appendChild(editButton);
+                          // editDelDiv.appendChild(deleteButton);
        
-                checkBoxAll.addEventListener('change', function() {
+                checkBoxinDiv.addEventListener('change', function() {
 
                     const checkedboxid = document.querySelectorAll('#checkedOrNot');
                     const total = checkedboxid.length;
@@ -110,13 +127,29 @@ export function addTask() {
                     
                     
                     
-                    if (checkBoxAll.checked && taskInput.value !== '' && titleInput.value !== '') {
-                                //console.log('Checkbox is checked'); 
+                    if (checkBoxinDiv.checked && taskInput.value !== '' && titleInput.value !== '') {
+                                  // console.log('Checkbox is checked'); 
                                  //console.log(checkBoxAll.id);
+                                 alert(titleInput.value + " : Task Added!");
+                                 const titleInfoEntered = document.createElement('h1');
+                                        titleInfoEntered.textContent = titleInput.value;
+                                        
+                                alert(titleInfoEntered.value + "goooot it");
+
+                                const detailsInfoEntered = document.createElement('p');
+                                        detailsInfoEntered.textContent = taskInput.value;
+                                        
+                                
+                                snippetDetails.appendChild(titleInfoEntered);
+                                snippetDetails.appendChild(detailsInfoEntered);
+                                 
 
                         progressPercent = Math.round((allChecked / total) * 100);
-                              //console.log(progressPercent);
+                        console.log(progressPercent);
                         progressBar.style.width = progressPercent + '%';
+
+                        titleInput.value = '';
+                        taskInput.value = '';
                     
                     } 
                     
