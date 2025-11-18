@@ -1,5 +1,6 @@
 export function addTask() {
     
+
     
     const Intro = document.querySelector('#topIntro');
           //const divInto = document.querySelector('#subIntro');
@@ -11,10 +12,17 @@ export function addTask() {
         
                      const progressBar = document.createElement('div');
                      progressBar.id = "progressBar";
+
         progressBarDiv.appendChild(progressBar);
 
-                     
     Intro.appendChild(progressBarDiv);
+
+
+    const progressNum = document.createElement('div');
+                     progressNum.id = "progressNum";
+
+    Intro.appendChild(progressNum);
+
    
         const beforeTopDiv = document.createElement('div'); 
         beforeTopDiv.id = 'beforeTopdiv';
@@ -123,34 +131,51 @@ export function addTask() {
                     const allChecked = isChecked.length;
                             //console.log(allChecked);
                     let progressPercent = 0;
-                            //console.log(progressPercent);
+                            //console.log(progressPercent); 
+                    const progressText = document.querySelector('#progressNum');
                     
                     
                     
+                              // if (checkBoxinDiv.checked && taskInput.value !== '' && titleInput.value !== '') {
+                              // use to update progress bar 
+
                     if (checkBoxinDiv.checked && taskInput.value !== '' && titleInput.value !== '') {
                                   // console.log('Checkbox is checked'); 
                                  //console.log(checkBoxAll.id);
-                                 alert(titleInput.value + " : Task Added!");
-                                 const titleInfoEntered = document.createElement('h1');
-                                        titleInfoEntered.textContent = titleInput.value;
-                                        
-                                alert(titleInfoEntered.value + "goooot it");
+                                   // alert(titleInput.value + " : Task Added!");
 
-                                const detailsInfoEntered = document.createElement('p');
-                                        detailsInfoEntered.textContent = taskInput.value;
-                                        
-                                
-                                snippetDetails.appendChild(titleInfoEntered);
-                                snippetDetails.appendChild(detailsInfoEntered);
+                                    const hdivInSnippet = document.createElement('div');
+                                          hdivInSnippet.id = "hdivInSnippetId";
+
+                                                const titleInfoEntered = document.createElement('textarea');
+                                                titleInfoEntered.id = "titleInfo";
+                                                        titleInfoEntered.textContent = "Title: " + "\n" + titleInput.value;
+                                                hdivInSnippet.appendChild(titleInfoEntered);
+                                                        
+                                                //alert(taskInput.value + "goooot it");
+                                     const paraInSnippet = document.createElement('div');
+                                             paraInSnippet.id = "paraInSnippetId";
+
+                                                const detailsInfoEntered = document.createElement('textarea');
+                                                detailsInfoEntered.id = "detailsInfo";
+                                                        detailsInfoEntered.textContent = "Details: " + "\n" + taskInput.value;
+                                                paraInSnippet.appendChild(detailsInfoEntered);
+                                                        
+                                                
+                                                snippetDetails.appendChild(hdivInSnippet);
+                                                snippetDetails.appendChild(paraInSnippet);
                                  
 
                         progressPercent = Math.round((allChecked / total) * 100);
                         console.log(progressPercent);
                         progressBar.style.width = progressPercent + '%';
 
-                        titleInput.value = '';
+                        progressText.textContent = "Progress: " +  allChecked + " out of " + total + " tasks done."      ;
+
                         taskInput.value = '';
-                    
+                        titleInput.value = '';
+
+                
                     } 
                     
                     else { 

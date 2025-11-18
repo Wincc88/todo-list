@@ -36,6 +36,20 @@ body {
     background-color: rgb(43, 181, 43);
 }
 
+#progressNum {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    border: 2px solid black;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(0, 0, 255, 0.193);
+    border-radius: 5px;
+}
+
 #topDiv {
     font-size: 20px;
     
@@ -140,14 +154,45 @@ textarea:focus, #titleInput:focus {
 
 .snippetClass {
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
     margin-left: 20px;
     margin-right: 20px;
     font-size: 18px;
     border: 2px solid orange;
-    height: 40px;
+    height: auto;
     background-color: lightblue;
-   
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#paraInSnippetId, #hdivInSnippetId {
+    align-items: center;
+    display: flex;
+    border: 2px solid pink;
+    margin: 1px;
+}
+
+#titleInfo, #detailsInfo {
+    font-size: 16px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    resize: none;
+    margin: none;
+}
+#titleInfo {
+    background-color: beige;
+    border: 2px solid purple;
+}
+ #detailsInfo {
+    
+    background-color: yellow;
+    border: 2px solid black;
 }
 
 .editDelDivtoAdd {

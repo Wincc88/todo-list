@@ -1,6 +1,8 @@
 import './styles.css';
 import { inimessage } from './pagemessage.js';
 import { addTask } from './addtask.js';
+import { addProject } from '.makeobject.js';
+import { makeProject } from '.makeobject.js';
 
 console.log(inimessage);
 
@@ -14,3 +16,6 @@ taskdiv.addEventListener('click', () => {
 
        addTask();
 });
+
+addProject("New Project");
+makeProject("Sample Project"); 
