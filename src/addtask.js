@@ -1,3 +1,5 @@
+import { makeProject, addProjecttoList, remFromlist } from "./makingobject";
+
 export function addTask() {
     
 
@@ -67,33 +69,95 @@ export function addTask() {
         topDiv.name = "addTaskButton";
         topDiv.value = "Add Task";
         Intro.appendChild(topDiv);
-
-        const taskInput = document.querySelector('#taskInput');
-        const titleInput = document.querySelector('#titleInput');
-
+           
+         topDiv.addEventListener('click', function(){ 
         
-        const editDelDiv = document.createElement('div');
-        editDelDiv.id = 'editDelDiv';
-        editDelDiv.className = 'editDeleteClass';
-        editDelDiv.style.display = 'none';
-                       
-
-                         const checkBoxAll = document.createElement('div');
-                                checkBoxAll.id = "checkedOrNotId";
-                                checkBoxAll.className = "checkedbtnClass";
-
-                                               const checkBoxinDiv = document.createElement('input');
-                                                checkBoxinDiv.type = "checkbox";
-                                                checkBoxinDiv.id = "checkedOrNot";
-                                                checkBoxinDiv.className = "checkedbtn";
-
-                        checkBoxAll.appendChild(checkBoxinDiv);
-
-                        const snippetDetails = document.createElement('div');
-                                // input.type = "text";
-                                        snippetDetails.id = "snippetId";
-                                        snippetDetails.className = "snippetClass";
+                     const taskInput = document.querySelector('#taskInput');
+                     
+                     const titleInput = document.querySelector('#titleInput');
+                    
+        
+                        // safe to read .value now
+                        console.log(taskInput.value);
+                        console.log(titleInput.value);
                         
+        
+                            // read DOM values first (no ternary)
+                                let title = '';
+                                let details = '';
+        
+                                 if (titleInput) {
+                                    if (titleInput.value) {
+                                        title = titleInput.value.trim();
+                                    }
+                                 }
+        
+                                 if (taskInput) {
+                                    if (taskInput.value) {
+                                        details = taskInput.value.trim();
+                                    }
+                                 }
+        
+                                // only proceed when both values exist
+                                if (title === '' || details === '') {
+                                    console.warn('Title or details empty — not adding.');
+                                    return;
+                                }
+                                
+                                // build project object from the read values and pass to makingobject
+                                
+                                const project = makeProject();
+                                 addProjecttoList(project);    // use is to know and count how many projects currently in list
+                            
+
+
+                const editDelDiv = document.createElement('div');
+                editDelDiv.id = 'editDelDiv';
+                editDelDiv.className = 'editDeleteClass';
+                             //editDelDiv.style.display = 'none';
+
+
+                        
+
+                         const checkBoxDiv = document.createElement('div');
+                                checkBoxDiv.id = "checkedOrNotId";
+                                checkBoxDiv.className = "checkedbtnClass";
+
+                                               const checkBtn = document.createElement('input');
+                                                checkBtn.type = "checkbox";
+                                                checkBtn.id = "checkedOrNot";
+                                                checkBtn.className = "checkedbtn";
+
+                        checkBoxDiv.appendChild(checkBtn);
+
+                         const snippetDetails = document.createElement('div');
+                            // input.type = "text";
+                                snippetDetails.id = "snippetId";
+                                snippetDetails.className = "snippetClass"; 
+                                         
+                                      const hdivInSnippet = document.createElement('div');
+                                      hdivInSnippet.id = "hdivInSnippetId";
+
+                                                const titleInfoEntered = document.createElement('textarea');
+                                                titleInfoEntered.id = "titleInfo";
+                                                titleInfoEntered.textContent = "Title: " + "\n" + project.title;
+                                      hdivInSnippet.appendChild(titleInfoEntered);
+                                                        
+                                                //alert(taskInput.value + "goooot it");
+                                               const paraInSnippet = document.createElement('div');
+                                               paraInSnippet.id = "paraInSnippetId";
+
+                                              const detailsInfoEntered = document.createElement('textarea');
+                                              detailsInfoEntered.id = "detailsInfo";
+                                              detailsInfoEntered.textContent = "Details: " + "\n" + project.details;
+                                      paraInSnippet.appendChild(detailsInfoEntered);
+                                                        
+                                                
+                                snippetDetails.appendChild(hdivInSnippet);
+                                snippetDetails.appendChild(paraInSnippet);
+
+                                                    
+
                         const editbtnDIv = document.createElement('div');
                                 editbtnDIv.id = "editDelIdToAdd";
                                 editbtnDIv.className = "editDelDivtoAdd";
@@ -114,14 +178,115 @@ export function addTask() {
 
                         editbtnDIv.appendChild(deleteButton);
 
-                    editDelDiv.appendChild(checkBoxAll);
+                    editDelDiv.appendChild(checkBoxDiv);
                     editDelDiv.appendChild(snippetDetails);
-                    editDelDiv.appendChild(editbtnDIv);
+                    editDelDiv.appendChild(editbtnDIv); 
+
+                                
+                Intro.appendChild(editDelDiv);
+
+                 taskInput.value = '';
+                 titleInput.value = ''; 
+
+                 deleteButton.addEventListener('click', function() {
+                        remFromlist();
+                        editDelDiv.remove(); 
+                 });
+                
+        });        
+
+                   
+                   
+
+
+
+                    /** use later 
+
+                    checkBtn.addEventListener('change', function() {
+                        updateProgressBar();
+                    });
+
+        // Delete button removes this project item
+                   deleteButton.addEventListener('click', function() {
+                        editDelDiv.remove();
+                        updateProgressBar();
+                   });
+
+        // Edit button toggles readonly
+                  editButton.addEventListener('click', function() {
+                        const isReadOnly = titleInfoEntered.readOnly;
+                        titleInfoEntered.readOnly = !isReadOnly;
+                        detailsInfoEntered.readOnly = !isReadOnly;
+                  });
+
+              projectsContainer.appendChild(editDelDiv);
+        }
+              
+        // Update progress bar based on all checkboxes
+        function updateProgressBar() {
+                const allCheckboxes = projectsContainer.querySelectorAll('.checkedbtn');
+                const checkedCheckboxes = projectsContainer.querySelectorAll('.checkedbtn:checked');
+                const total = allCheckboxes.length;
+                const checked = checkedCheckboxes.length;
+
+                if (total === 0) {
+                progressBar.style.width = '0%';
+                progressNum.textContent = '';
+                } else {
+                const percent = Math.round((checked / total) * 100);
+                progressBar.style.width = percent + '%';
+                progressNum.textContent = `Progress: ${checked} out of ${total} tasks done.`;
+                }
+        }
+         */
                    
                          // editDelDiv.appendChild(editButton);
                           // editDelDiv.appendChild(deleteButton);
-       
-                checkBoxinDiv.addEventListener('change', function() {
+                /*
+                checkBtn.addEventListener('change', function() {
+                        
+                        const progressText = document.querySelector('#progressNum');        
+                        const isChecked = document.querySelectorAll('#checkedOrNot:checked');
+                        if (isChecked.length > 0) {
+                                console.log(isChecked[0].value);
+                                console.log(isChecked.length);
+                                console.log('complete');
+                                progressText.textContent = "complete";
+                        }
+                        else {
+                                console.log('not complete')
+                                progressText.textContent = "nanan";
+                        }
+                });
+                */
+
+                 //const clickAddtaskbtn = document.querySelectorAll('#topDiv');
+                 /*
+                     topDiv.addEventListener('click', function() {
+                        
+                        const hdivInSnippet = document.createElement('div');
+                        hdivInSnippet.id = "hdivInSnippetId";
+
+                                        const titleInfoEntered = document.createElement('textarea');
+                                        titleInfoEntered.id = "titleInfo";
+
+                                                
+                                                        
+                                                //alert(taskInput.value + "goooot it");
+                        const paraInSnippet = document.createElement('div');
+                        paraInSnippet.id = "paraInSnippetId";
+
+                                                const detailsInfoEntered = document.createElement('textarea');
+                                                detailsInfoEntered.id = "detailsInfo"; */
+
+                                                        
+                // });
+                                 
+
+                          
+                
+                          /** 
+                checkBtn.addEventListener('change', function() {
 
                     const checkedboxid = document.querySelectorAll('#checkedOrNot');
                     const total = checkedboxid.length;
@@ -136,12 +301,12 @@ export function addTask() {
                     
                     
                     
-                              // if (checkBoxinDiv.checked && taskInput.value !== '' && titleInput.value !== '') {
+                              // if (checkBtn.checked && taskInput.value !== '' && titleInput.value !== '') {
                               // use to update progress bar 
 
-                    if (checkBoxinDiv.checked && taskInput.value !== '' && titleInput.value !== '') {
+                    if (checkBtn.checked && taskInput.value !== '' && titleInput.value !== '') {
                                   // console.log('Checkbox is checked'); 
-                                 //console.log(checkBoxAll.id);
+                                 //console.log(checkBoxDiv.id);
                                    // alert(titleInput.value + " : Task Added!");
 
                                     const hdivInSnippet = document.createElement('div');
@@ -186,23 +351,18 @@ export function addTask() {
                     }
                     
                 });
-                  
+                */
+               
+                
+                                 
+                
 
-    
-         Intro.appendChild(editDelDiv);
-
-         topDiv.addEventListener('click', function handleClick() {
-
-                /** add logic that if title and details is not empty later */
-            if (editDelDiv.style.display === 'none') {
-                editDelDiv.style.display = 'flex';
-            } else {
-                editDelDiv.style.display = 'none';
-            }
-         });
-
+         
+        
+          
 
          /** add event listeners for checkbox clicked for progress bar later */
+         
         
 
 }

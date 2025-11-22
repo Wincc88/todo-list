@@ -2,7 +2,9 @@ import './styles.css';
 import { inimessage } from './pagemessage.js';
 import { addTask } from './addtask.js';
 import { makeProject } from './makingobject.js';
-import { addProject } from './makingobject.js';
+import { addProjecttoList } from './makingobject.js';
+import { allInsideList } from './makingobject.js';
+  //import { testing } from './moredetails.js';
 
 
 
@@ -20,5 +22,6 @@ taskdiv.addEventListener('click', () => {
 });
 
 
-makeProject('Default Project');
-addProject('Default Project');
+makeProject();
+addProjecttoList();
+allInsideList();
