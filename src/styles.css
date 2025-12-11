@@ -52,7 +52,7 @@ body {
 
 #topDiv {
     font-size: 20px;
-    
+    border: 5px solid purple;
     color: white;
     margin-bottom: 20px;
     background-color:rgb(23, 163, 23);
@@ -131,7 +131,7 @@ textarea:focus, #titleInput:focus {
     margin-top: 10px;
     margin-bottom: 20px;
     margin-left: 2px;
-    border: 2px solid green;
+    border: 5px solid silver;
     padding: 10px;  
     display: flex;
     justify-content: center;
@@ -228,4 +228,78 @@ textarea:focus, #titleInput:focus {
 #editButton:hover, #deleteButton:hover, #checkedOrNot:hover {
     opacity: 1;
     transform: scale(1.1);
+}
+
+
+.parentDivClass {
+    border: 3px solid black;
+
+    padding: 10px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    cursor: pointer;
+    top: 0;
+    left: 20%;
+    width: 35%;
+    height: 29%;
+    margin-top: 10px;
+    z-index: 9;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.editedTitleClass, .editedDetailsClass {
+    border: 2px solid black;
+    background-color: lightyellow;
+    text-wrap: wrap;
+    
+}
+
+.editedTitleClass {
+    height: 30px;
+   
+} 
+
+.editedDetailsClass {
+    height: 50px;
+    
+}
+
+.headingandInputClass, .detailsheadingandTextareaClass {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid greenyellow;
+    margin-bottom: 10px;
+}
+
+.titleHeadingClass, .detailsHeadingClass {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: lightpink;
+    text-align: left;
+}
+
+
+
+.okcancelDivClass {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid blue;
+    margin-top: 1px;
+}
+
+.okbtnClass, .cancelbtnClass {
+    font-size: 13px;
+    padding: 5px 10px;
+    color: white;
+    background-color: green;
+    border: 1px solid black;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-right: 5px;
+
 }

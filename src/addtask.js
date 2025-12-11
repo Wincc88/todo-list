@@ -1,12 +1,13 @@
-import { makeProject, addProjecttoList, remFromlist } from "./makingobject";
+import { makeProject, addProjecttoList, remFromlist, allInsideList, checky, allProjects } from "./makingobject";
 
 export function addTask() {
     
-
+    
     
     const Intro = document.querySelector('#topIntro');
           //const divInto = document.querySelector('#subIntro');
           //divInto.remove();
+          
 
         const progressBarDiv = document.createElement('div');
               progressBarDiv.id = "progressBarDiv";
@@ -69,51 +70,34 @@ export function addTask() {
         topDiv.name = "addTaskButton";
         topDiv.value = "Add Task";
         Intro.appendChild(topDiv);
-           
-         topDiv.addEventListener('click', function(){ 
+
+
         
-                     const taskInput = document.querySelector('#taskInput');
-                     
-                     const titleInput = document.querySelector('#titleInput');
                     
         
-                        // safe to read .value now
-                        console.log(taskInput.value);
-                        console.log(titleInput.value);
                         
-        
-                            // read DOM values first (no ternary)
-                                let title = '';
-                                let details = '';
-        
-                                 if (titleInput) {
-                                    if (titleInput.value) {
-                                        title = titleInput.value.trim();
-                                    }
-                                 }
-        
-                                 if (taskInput) {
-                                    if (taskInput.value) {
-                                        details = taskInput.value.trim();
-                                    }
-                                 }
-        
-                                // only proceed when both values exist
-                                if (title === '' || details === '') {
-                                    console.warn('Title or details empty — not adding.');
-                                    return;
-                                }
+
+                        
+           
+         topDiv.addEventListener('click', function() { 
+                
+                
+                let taskwritten = taskInput.value;
+                let titlewritten = titleInput.value;
+
+                if (taskwritten && titlewritten) {
                                 
-                                // build project object from the read values and pass to makingobject
-                                
-                                const project = makeProject();
-                                 addProjecttoList(project);    // use is to know and count how many projects currently in list
+
+                         addProjecttoList(titlewritten, taskwritten );
+
+                           //project is made and in list with value given
+                        
+                        
                             
-
-
                 const editDelDiv = document.createElement('div');
                 editDelDiv.id = 'editDelDiv';
                 editDelDiv.className = 'editDeleteClass';
+                
                              //editDelDiv.style.display = 'none';
 
 
@@ -140,7 +124,7 @@ export function addTask() {
 
                                                 const titleInfoEntered = document.createElement('textarea');
                                                 titleInfoEntered.id = "titleInfo";
-                                                titleInfoEntered.textContent = "Title: " + "\n" + project.title;
+                                                titleInfoEntered.textContent = "Title: " + "\n" + titlewritten;
                                       hdivInSnippet.appendChild(titleInfoEntered);
                                                         
                                                 //alert(taskInput.value + "goooot it");
@@ -149,7 +133,7 @@ export function addTask() {
 
                                               const detailsInfoEntered = document.createElement('textarea');
                                               detailsInfoEntered.id = "detailsInfo";
-                                              detailsInfoEntered.textContent = "Details: " + "\n" + project.details;
+                                              detailsInfoEntered.textContent = "Details: " + "\n" + taskwritten;
                                       paraInSnippet.appendChild(detailsInfoEntered);
                                                         
                                                 
@@ -175,25 +159,243 @@ export function addTask() {
                                                 deleteButton.className = "deletebtn";
                                                 deleteButton.type = "button";
                                                 deleteButton.textContent = "Delete";
+                                                
+                                                
 
                         editbtnDIv.appendChild(deleteButton);
 
                     editDelDiv.appendChild(checkBoxDiv);
                     editDelDiv.appendChild(snippetDetails);
                     editDelDiv.appendChild(editbtnDIv); 
-
+   
                                 
                 Intro.appendChild(editDelDiv);
 
                  taskInput.value = '';
                  titleInput.value = ''; 
 
-                 deleteButton.addEventListener('click', function() {
-                        remFromlist();
-                        editDelDiv.remove(); 
-                 });
+                 
+
+                          // now do for edit button
+                        editButton.addEventListener('click', function() { 
+                              
+
+                                // put in parent div editedTitle and editedDetails 
+                                const parentDiv = document.createElement("div");
+                                parentDiv.id = "parentDivId";
+                                parentDiv.className = "parentDivClass"; 
+                                                
+                                                // bring up div to edit title and details  
+                                                const headingandInput = document.createElement("div");
+                                                headingandInput.id = "headingandInputId";
+                                                headingandInput.className = "headingandInputClass"; 
+
+                                                                const titleHeading = document.createElement("h3");
+                                                                titleHeading.id = "titleHeadingId";
+                                                                titleHeading.className = "titleHeadingClass";
+                                                                titleHeading.textContent = "Edit Task Title:";
+                                                                headingandInput.appendChild(titleHeading);
+
+                                                                const editedTitle = document.createElement("input");
+                                                                editedTitle.id = "editedTitleId";
+                                                                editedTitle.className = "editedTitleClass"; 
+                                                                headingandInput.appendChild(editedTitle);
+                                                        
+                                                const detailsheadingandTextarea = document.createElement("div");
+                                                detailsheadingandTextarea.id = "detailsheadingandTextareaId";
+                                                detailsheadingandTextarea.className = "detailsheadingandTextareaClass";                
+                                                
+                                                                const detailsHeading = document.createElement("h3");
+                                                                detailsHeading.id = "detailsHeadingId";
+                                                                detailsHeading.className = "detailsHeadingClass";
+                                                                detailsHeading.textContent = "Edit Task Details:";
+                                                                detailsheadingandTextarea.appendChild(detailsHeading);
+
+                                                                const editedDetails = document.createElement("textarea");
+                                                                editedDetails.id = "editedDetailsId";
+                                                                editedDetails.className = "editedDetailsClass";
+                                                                detailsheadingandTextarea.appendChild(editedDetails);
+                                                        
+                                         
+                                                
+                                           
+                                         const okcancelDiv = document.createElement("div");
+                                         okcancelDiv.id = "okcancelDivId";
+                                         okcancelDiv.className = "okcancelDivClass";
+
+                                                const okbtn = document.createElement("button");
+                                                okbtn.id = "okbtnId";
+                                                okbtn.className = "okbtnClass";
+                                                okbtn.textContent = "OK";
+                                                okcancelDiv.appendChild(okbtn);
+
+                                                const cancelbtn = document.createElement("button");
+                                                cancelbtn.id = "cancelbtnId";
+                                                cancelbtn.className = "cancelbtnClass";
+                                                cancelbtn.textContent = "Cancel";
+                                                okcancelDiv.appendChild(cancelbtn);
+
+                                parentDiv.appendChild(headingandInput);
+                                parentDiv.appendChild(detailsheadingandTextarea);
+                                parentDiv.appendChild(okcancelDiv);
+
+                        Intro.appendChild(parentDiv);
+
+                               editedDetails.value = taskwritten;
+                               editedTitle.value = titlewritten;   
+
+
+
+                               // make a function that the ok checks if edited values are there then only executes
+                               // this function works with when the edit it clicked again as it shows the last edited values
+
+                               /*
+                               
+                               function isTitleorDetailsEdited() {
+
+                                    let newTitleTrimmed = editedTitle.value.trim();
+                                    let newDetailsTrimmed = editedDetails.value.trim(); 
+
+                                     //  let newTitleValue = editedTitle.value.trim();
+                                     //  let newDetailsValue = editedDetails.value.trim();    
+                                         
+                                    //    titleInfoEntered.textContent = "Title: " + "\n" + newTitleValue;
+                                     //   detailsInfoEntered.textContent = "Details: " + "\n" + newDetailsValue;
+
+                                     if (newTitleTrimmed !== titlewritten || newDetailsTrimmed !== taskwritten) { 
+
+                                        titlewritten = newTitleTrimmed;
+                                        taskwritten = newDetailsTrimmed; 
+
+                                        console.log('Title or Details edited to:', titlewritten, taskwritten);
+
+                                        titleInfoEntered.textContent = "Title: " + "\n" + titlewritten;
+                                        detailsInfoEntered.textContent = "Details: " + "\n" + taskwritten;
+
+                                      
+                                     }
+
+                                       
+                                
+                                };
+                                   
+
+                               */
+
+                                   
+                                 // edit the value and updte on ok button click
+                                 okbtn.addEventListener('click', function() {  
+
+                                      
+                                       let newTitleValue = editedTitle.value.trim();
+                                       let newDetailsValue = editedDetails.value.trim();    
+                                         
+                                        titleInfoEntered.textContent = "Title: " + "\n" + newTitleValue;
+                                        detailsInfoEntered.textContent = "Details: " + "\n" + newDetailsValue;
+
+                                        // now update in allProjects array too
+                                        const projectToEdit = allProjects.find(project => project.title === titlewritten && project.details === taskwritten);   
+                                        if (projectToEdit) {
+                                            projectToEdit.title = newTitleValue;
+                                            projectToEdit.details = newDetailsValue;
+
+                                        }    
+                                
+                                        
+                                        console.log('Project edited:', projectToEdit);
+                                        // remove the edit div after ok clicked 
+                                        
+                                        parentDiv.remove();
+                                        // call updated list
+                                        allInsideList();
+
+                                        
+                              
+                                   
+                                 });
+
+                                 // cancel button to just remove edit div
+                                 cancelbtn.addEventListener('click', function() {
+                                      parentDiv.remove();                                               
+                                       // allInsideList();
+                                 });    
+                                  
+
+                                 // deleted object after edit should update in new way too      
+                                
+                        });
+
+
+                     
+                        deleteButton.addEventListener('click', function() { 
+                     
+
+                      // i use finfdIndex to find and delete from allProjects array 
+                      // has to be inside this function to get updated values
+                      
+                     
+                    const indexToDelete = allProjects.findIndex(project => project.title === titlewritten && project.details === taskwritten);
+                   // const che = allProjects.findIndex(project => project.title !== titlewritten && project.details !== taskwritten);
+                     if (indexToDelete !== -1) {
+                           allProjects.splice(indexToDelete, 1);   
+
+                           // console.log('Project deleted:', titlewritten, taskwritten);
+                                   
+
+                                   
+                     }     
+
+                                     
+                        // now I check the project deleted
+                        console.log('Project deleted:', titlewritten, taskwritten);
+
+                      
+                        
+                        const indexToDeleteUpdated = allProjects.findIndex(project => project.title === titleInfoEntered.textContent && project.details === detailsInfoEntered.textContent); 
+                              if (indexToDeleteUpdated !== -1) {
+                                   allProjects.splice(indexToDeleteUpdated, 1);
+                          } 
+
+                                console.log('Project deleted after edit:', titleInfoEntered.textContent, detailsInfoEntered.textContent);
+
+                        
+                       /*  
+                          elseif ( titleInfoEntered.textContent === newTitleValue || 
+                                 detailsInfoEntered.textContent === newDetailsValue) {
+                                
+                                const indexToDeleteUpdated = allProjects.findIndex(project => project.title === newTitleValue && project.details === newDetailsValue); 
+                                if (indexToDeleteUpdated !== -1) {
+                                    allProjects.splice(indexToDeleteUpdated, 1);
+                                }
+
+                                console.log('Project deleted:', newTitleValue, newDetailsValue);   
+
+                             
+                         editDelDiv.remove();
+                       */
+                             
+                        editDelDiv.remove();
+                         
+
+                         // my updated list is called constantly with allInsideList();
+                       allInsideList();
+
+
+
+                 });      
+                } 
+
+                    
+
+
                 
-        });        
+                
+              
+        });    
+
+       
+         
+        
 
                    
                    
