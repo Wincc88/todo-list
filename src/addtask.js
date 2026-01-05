@@ -289,6 +289,13 @@ export function addTask() {
                                       
                                        let newTitleValue = editedTitle.value.trim();
                                        let newDetailsValue = editedDetails.value.trim();    
+                                      
+
+                                      // i validated the edited values here so as not to have an empty title or details      
+                                       if(newTitleValue === '' || newDetailsValue === undefined || newDetailsValue === '' || newTitleValue === undefined) {
+                                        alert('Both Title and Details must be filled out to edit the task.');
+                                        return; // exit the function if validation fails
+                                       }
                                          
                                         titleInfoEntered.textContent = "Title: " + "\n" + newTitleValue;
                                         detailsInfoEntered.textContent = "Details: " + "\n" + newDetailsValue;
@@ -299,7 +306,10 @@ export function addTask() {
                                             projectToEdit.title = newTitleValue;
                                             projectToEdit.details = newDetailsValue;
 
-                                        }    
+                                        } 
+                                         // i needed to update titlewritten and taskwritten to the latest edited values
+                                        titlewritten = newTitleValue;
+                                        taskwritten = newDetailsValue;   
                                 
                                         
                                         console.log('Project edited:', projectToEdit);
