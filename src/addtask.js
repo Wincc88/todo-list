@@ -293,78 +293,82 @@ export function addTask() {
                                        // allInsideList();
                                  });    
                                   
-
-                                 // deleted object after edit should update in new way too      
+   
                                 
                         });
 
 
-                     
+                                // now do for delete button
                         deleteButton.addEventListener('click', function() { 
                      
 
-                      // i use finfdIndex to find and delete from allProjects array 
-                      // has to be inside this function to get updated values
-                      
-                     
-                    const indexToDelete = allProjects.findIndex(project => project.title === titlewritten && project.details === taskwritten);
-                   // const che = allProjects.findIndex(project => project.title !== titlewritten && project.details !== taskwritten);
-                     if (indexToDelete !== -1) {
-                           allProjects.splice(indexToDelete, 1);   
+                         // i use finfdIndex to find and delete both updated and edited from allProjects array 
+                        
+                        const indexToDelete = allProjects.findIndex(project => project.title === titlewritten && project.details === taskwritten);
+                        if (indexToDelete !== -1) {
+                                allProjects.splice(indexToDelete, 1);              
+                        }     
 
-                           // console.log('Project deleted:', titlewritten, taskwritten);
-                                   
-
-                                   
-                     }     
-
-                                     
                         // now I check the project deleted
                         console.log('Project deleted:', titlewritten, taskwritten);
 
                       
                         
                         const indexToDeleteUpdated = allProjects.findIndex(project => project.title === titleInfoEntered.textContent && project.details === detailsInfoEntered.textContent); 
-                              if (indexToDeleteUpdated !== -1) {
+                        if (indexToDeleteUpdated !== -1) {
                                    allProjects.splice(indexToDeleteUpdated, 1);
-                          } 
+                        } 
+                         
+                        // now I check the project deleted after every edit
+                        console.log('Project deleted after edit:', titleInfoEntered.textContent, detailsInfoEntered.textContent);
 
-                                console.log('Project deleted after edit:', titleInfoEntered.textContent, detailsInfoEntered.textContent);
-
-                        
-                       /*  
-                          elseif ( titleInfoEntered.textContent === newTitleValue || 
-                                 detailsInfoEntered.textContent === newDetailsValue) {
-                                
-                                const indexToDeleteUpdated = allProjects.findIndex(project => project.title === newTitleValue && project.details === newDetailsValue); 
-                                if (indexToDeleteUpdated !== -1) {
-                                    allProjects.splice(indexToDeleteUpdated, 1);
-                                }
-
-                                console.log('Project deleted:', newTitleValue, newDetailsValue);   
-
-                             
-                         editDelDiv.remove();
-                       */
-                             
+                         // remove div from DOM    
                         editDelDiv.remove();
                          
-
-                         // my updated list is called constantly with allInsideList();
+                         // my updated list is called constantly with allInsideList() with add, edit, delete;
                        allInsideList();
 
 
 
-                 });      
+                        });      
+
+
+                        checkBtn.addEventListener('change', function() {
+
+                                const allCheckboxes = document.querySelectorAll('.checkedbtn');          
+                                const checkedCheckboxes = document.querySelectorAll('.checkedbtn:checked');
+                                const total = allCheckboxes.length;
+                                // console.log(total);
+                                const checked = checkedCheckboxes.length;
+                                //console.log(checked); 
+
+                                                if (total === 0) {
+                                                        progressBar.style.width = '0%';
+                                                        progressNum.textContent = '';
+                                                        
+                                                } 
+                                                else if (total === 1) {
+                                                        const percent = Math.round((checked / total) * 100);
+                                                        progressBar.style.width = percent + '%';
+                                                        progressNum.textContent = `Progress: ${checked} out of ${total} task done.`;
+                                                }
+                                                
+                                                else {
+                                                const percent = Math.round((checked / total) * 100);
+                                                progressBar.style.width = percent + '%';
+                                                progressNum.textContent = `Progress: ${checked} out of ${total} tasks done.`;
+                                                }
+
+                        });
+                             
+   
+
+                                
                 } 
-
-                    
-
-
-                
-                
               
         });    
+
+         
 
        
          
@@ -394,13 +398,13 @@ export function addTask() {
                         detailsInfoEntered.readOnly = !isReadOnly;
                   });
 
-              projectsContainer.appendChild(editDelDiv);
+              Intro.appendChild(editDelDiv);
         }
               
         // Update progress bar based on all checkboxes
         function updateProgressBar() {
-                const allCheckboxes = projectsContainer.querySelectorAll('.checkedbtn');
-                const checkedCheckboxes = projectsContainer.querySelectorAll('.checkedbtn:checked');
+                const allCheckboxes = Intro.querySelectorAll('.checkedbtn');
+                const checkedCheckboxes = Intro.querySelectorAll('.checkedbtn:checked');
                 const total = allCheckboxes.length;
                 const checked = checkedCheckboxes.length;
 
