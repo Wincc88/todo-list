@@ -245,45 +245,8 @@ export function addTask() {
                                editedTitle.value = titlewritten;   
 
 
-
-                               // make a function that the ok checks if edited values are there then only executes
-                               // this function works with when the edit it clicked again as it shows the last edited values
-
-                               /*
-                               
-                               function isTitleorDetailsEdited() {
-
-                                    let newTitleTrimmed = editedTitle.value.trim();
-                                    let newDetailsTrimmed = editedDetails.value.trim(); 
-
-                                     //  let newTitleValue = editedTitle.value.trim();
-                                     //  let newDetailsValue = editedDetails.value.trim();    
-                                         
-                                    //    titleInfoEntered.textContent = "Title: " + "\n" + newTitleValue;
-                                     //   detailsInfoEntered.textContent = "Details: " + "\n" + newDetailsValue;
-
-                                     if (newTitleTrimmed !== titlewritten || newDetailsTrimmed !== taskwritten) { 
-
-                                        titlewritten = newTitleTrimmed;
-                                        taskwritten = newDetailsTrimmed; 
-
-                                        console.log('Title or Details edited to:', titlewritten, taskwritten);
-
-                                        titleInfoEntered.textContent = "Title: " + "\n" + titlewritten;
-                                        detailsInfoEntered.textContent = "Details: " + "\n" + taskwritten;
-
-                                      
-                                     }
-
-                                       
-                                
-                                };
                                    
-
-                               */
-
-                                   
-                                 // edit the value and updte on ok button click
+                                 // edit values and update on ok button click
                                  okbtn.addEventListener('click', function() {  
 
                                       
