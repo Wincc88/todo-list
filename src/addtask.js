@@ -1,4 +1,4 @@
-import { makeProject, addProjecttoList, remFromlist, allInsideList, checky, allProjects } from "./makingobject";
+import { makeProject, addProjecttoList,  allInsideList, allProjects, totalProjectsNum } from "./makingobject";
 
 export function addTask() {
     
@@ -7,7 +7,14 @@ export function addTask() {
     const Intro = document.querySelector('#topIntro');
           //const divInto = document.querySelector('#subIntro');
           //divInto.remove();
-          
+        
+        const totalTasksDiv = document.createElement('div');
+                totalTasksDiv.id = "totalTasksDivId";
+                totalTasksDiv.className = "totalTasksDivClass";
+                totalTasksDiv.textContent = allProjects.length + " Total Task"
+        Intro.appendChild(totalTasksDiv);
+                
+        
 
         const progressBarDiv = document.createElement('div');
               progressBarDiv.id = "progressBarDiv";
@@ -70,15 +77,10 @@ export function addTask() {
         topDiv.name = "addTaskButton";
         topDiv.value = "Add Task";
         Intro.appendChild(topDiv);
-
-
         
-                    
-        
-                        
 
+            
                         
-           
          topDiv.addEventListener('click', function() { 
                 
                 
@@ -100,7 +102,24 @@ export function addTask() {
                 
                              //editDelDiv.style.display = 'none';
 
+                         // create div besiide checkBoxDiv that displays time and date(madedate)
+                         const madeDateDiv = document.createElement('div');
+                         madeDateDiv.id = "madeDateId";
+                         madeDateDiv.className = "madeDateClass";
+                                const madepara = document.createElement('p');
+                                const paradate = document.createElement('p');
+                                
 
+                                madepara.textContent = "Created on: ";
+                                madeDateDiv.appendChild(madepara);
+                                                                       
+                                // .madedate.tolocalString() if seconds needed or toDateString() if no time needed;
+                                paradate.textContent = allProjects[allProjects.length -1].madedate;
+                                madeDateDiv.appendChild(paradate);
+                         
+
+                         
+ 
                         
 
                          const checkBoxDiv = document.createElement('div');
@@ -164,12 +183,16 @@ export function addTask() {
 
                         editbtnDIv.appendChild(deleteButton);
 
+                    editDelDiv.appendChild(madeDateDiv);
                     editDelDiv.appendChild(checkBoxDiv);
                     editDelDiv.appendChild(snippetDetails);
                     editDelDiv.appendChild(editbtnDIv); 
+
    
                                 
                 Intro.appendChild(editDelDiv);
+                
+
 
                  taskInput.value = '';
                  titleInput.value = ''; 
@@ -281,6 +304,8 @@ export function addTask() {
                                         parentDiv.remove();
                                         // call updated list
                                         allInsideList();
+                                         console.log(allProjects.length + " tasks in total now.");
+                                          
 
                                         
                               
@@ -327,8 +352,9 @@ export function addTask() {
                          
                          // my updated list is called constantly with allInsideList() with add, edit, delete;
                        allInsideList();
-
-
+                       
+                       totalTasksDiv.textContent = totalProjectsNum();
+                     
 
                         });      
 
@@ -360,14 +386,16 @@ export function addTask() {
                                                 }
 
                         });
-                             
-   
-
+                 
+                  totalTasksDiv.textContent = totalProjectsNum(); 
+                 
                                 
                 } 
+                
               
+                
         });    
-
+            
          
 
        

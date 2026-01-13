@@ -58,5 +58,7 @@ export function allInsideList() {
 
 }
 
-
-
+export function totalProjectsNum() {
+    return allProjects.length + " tasks in total now.";
+   // return allProjects.length;
+} 
