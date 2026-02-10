@@ -1,11 +1,12 @@
-import { makeProject, addProjecttoList,  allInsideList, allProjects, totalProjectsNum } from "./makingobject";
+import { makeProject, addProjecttoList,  allInsideList, allProjects, totalProjectsNum, putinlocalstorage, getfromlocalstorage } from "./makingobject";
 
 export function addTask() {
     
     
     
     const Intro = document.querySelector('#topIntro');
-          //const divInto = document.querySelector('#subIntro');
+
+           //const subIntro = document.querySelector('#subIntro');
           //divInto.remove();
         
         const totalTasksDiv = document.createElement('div');
@@ -303,7 +304,7 @@ export function addTask() {
                                         
                                         parentDiv.remove();
                                         // call updated list
-                                        allInsideList();
+                                         allInsideList();
                                          console.log(allProjects.length + " tasks in total now.");
                                           
 
@@ -361,9 +362,9 @@ export function addTask() {
 
                         checkBtn.addEventListener('change', function() {
 
-                                const allCheckboxes = document.querySelectorAll('.checkedbtn');          
+                               // const allCheckboxes = document.querySelectorAll('.checkedbtn');         
                                 const checkedCheckboxes = document.querySelectorAll('.checkedbtn:checked');
-                                const total = allCheckboxes.length;
+                                const total = allProjects.length;
                                 // console.log(total);
                                 const checked = checkedCheckboxes.length;
                                 //console.log(checked); 
@@ -391,185 +392,39 @@ export function addTask() {
                  
                                 
                 } 
+                putinlocalstorage();
                 
-              
+
                 
         });    
-            
+       // getfromlocalstorage();    // used in index already, no need to call again here 
          
+       //localStorage.clear();
 
-       
+       const makediv = document.createElement('div');
+       makediv.id = "makedivId";
+       makediv.className = "makedivClass";
+       makediv.style.marginTop = "2px";
+       makediv.style.marginBottom = "10px";
+       makediv.style.fontSize = "14px";
+       makediv.style.color = "gray";
+       makediv.style.border = "2px solid blue";
+       makediv.style.height = "60px";
+
+       makediv.textContent = JSON.stringify(allProjects);
+        Intro.appendChild(makediv); 
+
+        
+           
+        
+        
+                
+
+                
+
+         
          
         
 
-                   
-                   
-
-
-
-                    /** use later 
-
-                    checkBtn.addEventListener('change', function() {
-                        updateProgressBar();
-                    });
-
-        // Delete button removes this project item
-                   deleteButton.addEventListener('click', function() {
-                        editDelDiv.remove();
-                        updateProgressBar();
-                   });
-
-        // Edit button toggles readonly
-                  editButton.addEventListener('click', function() {
-                        const isReadOnly = titleInfoEntered.readOnly;
-                        titleInfoEntered.readOnly = !isReadOnly;
-                        detailsInfoEntered.readOnly = !isReadOnly;
-                  });
-
-              Intro.appendChild(editDelDiv);
-        }
-              
-        // Update progress bar based on all checkboxes
-        function updateProgressBar() {
-                const allCheckboxes = Intro.querySelectorAll('.checkedbtn');
-                const checkedCheckboxes = Intro.querySelectorAll('.checkedbtn:checked');
-                const total = allCheckboxes.length;
-                const checked = checkedCheckboxes.length;
-
-                if (total === 0) {
-                progressBar.style.width = '0%';
-                progressNum.textContent = '';
-                } else {
-                const percent = Math.round((checked / total) * 100);
-                progressBar.style.width = percent + '%';
-                progressNum.textContent = `Progress: ${checked} out of ${total} tasks done.`;
-                }
-        }
-         */
-                   
-                         // editDelDiv.appendChild(editButton);
-                          // editDelDiv.appendChild(deleteButton);
-                /*
-                checkBtn.addEventListener('change', function() {
-                        
-                        const progressText = document.querySelector('#progressNum');        
-                        const isChecked = document.querySelectorAll('#checkedOrNot:checked');
-                        if (isChecked.length > 0) {
-                                console.log(isChecked[0].value);
-                                console.log(isChecked.length);
-                                console.log('complete');
-                                progressText.textContent = "complete";
-                        }
-                        else {
-                                console.log('not complete')
-                                progressText.textContent = "nanan";
-                        }
-                });
-                */
-
-                 //const clickAddtaskbtn = document.querySelectorAll('#topDiv');
-                 /*
-                     topDiv.addEventListener('click', function() {
-                        
-                        const hdivInSnippet = document.createElement('div');
-                        hdivInSnippet.id = "hdivInSnippetId";
-
-                                        const titleInfoEntered = document.createElement('textarea');
-                                        titleInfoEntered.id = "titleInfo";
-
-                                                
-                                                        
-                                                //alert(taskInput.value + "goooot it");
-                        const paraInSnippet = document.createElement('div');
-                        paraInSnippet.id = "paraInSnippetId";
-
-                                                const detailsInfoEntered = document.createElement('textarea');
-                                                detailsInfoEntered.id = "detailsInfo"; */
-
-                                                        
-                // });
-                                 
-
-                          
-                
-                          /** 
-                checkBtn.addEventListener('change', function() {
-
-                    const checkedboxid = document.querySelectorAll('#checkedOrNot');
-                    const total = checkedboxid.length;
-                           //console.log(total);
-                    const isChecked = document.querySelectorAll('#checkedOrNot:checked');
-                           //console.log(isChecked);
-                    const allChecked = isChecked.length;
-                            //console.log(allChecked);
-                    let progressPercent = 0;
-                            //console.log(progressPercent); 
-                    const progressText = document.querySelector('#progressNum');
-                    
-                    
-                    
-                              // if (checkBtn.checked && taskInput.value !== '' && titleInput.value !== '') {
-                              // use to update progress bar 
-
-                    if (checkBtn.checked && taskInput.value !== '' && titleInput.value !== '') {
-                                  // console.log('Checkbox is checked'); 
-                                 //console.log(checkBoxDiv.id);
-                                   // alert(titleInput.value + " : Task Added!");
-
-                                    const hdivInSnippet = document.createElement('div');
-                                          hdivInSnippet.id = "hdivInSnippetId";
-
-                                                const titleInfoEntered = document.createElement('textarea');
-                                                titleInfoEntered.id = "titleInfo";
-                                                        titleInfoEntered.textContent = "Title: " + "\n" + titleInput.value;
-                                                hdivInSnippet.appendChild(titleInfoEntered);
-                                                        
-                                                //alert(taskInput.value + "goooot it");
-                                     const paraInSnippet = document.createElement('div');
-                                             paraInSnippet.id = "paraInSnippetId";
-
-                                                const detailsInfoEntered = document.createElement('textarea');
-                                                detailsInfoEntered.id = "detailsInfo";
-                                                        detailsInfoEntered.textContent = "Details: " + "\n" + taskInput.value;
-                                                paraInSnippet.appendChild(detailsInfoEntered);
-                                                        
-                                                
-                                                snippetDetails.appendChild(hdivInSnippet);
-                                                snippetDetails.appendChild(paraInSnippet);
-                                 
-
-                        progressPercent = Math.round((allChecked / total) * 100);
-                        console.log(progressPercent);
-                        progressBar.style.width = progressPercent + '%';
-
-                        progressText.textContent = "Progress: " +  allChecked + " out of " + total + " tasks done."      ;
-
-                        taskInput.value = '';
-                        titleInput.value = '';
-
-                
-                    } 
-                    
-                    else { 
-                                  //console.log('Checkbox is unchecked');
-                        progressBar.style.width = Math.round((allChecked / total) * 100);
-                                 //console.log(progressPercent);
-                        progressBar.style.width = progressPercent + '%';
-                    }
-                    
-                });
-                */
-               
-                
-                                 
-                
-
-         
-        
-          
-
-         /** add event listeners for checkbox clicked for progress bar later */
-         
-        
 
 }
