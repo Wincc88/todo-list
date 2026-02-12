@@ -18,7 +18,7 @@ taskdiv.addEventListener('click', () => {
        
        taskdiv.replaceChildren();   
        
-       getfromlocalstorage();   // load any saved projects from local storage
+       getfromlocalstorage(); // load any saved projects from local storage shows total projects in console -- i like this here
 
        addTask();
 });

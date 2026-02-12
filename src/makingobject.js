@@ -41,11 +41,11 @@ export function addProjecttoList(projectTitle, projectDetails, id) {
      
    // console.log(allProjects);
 
-      console.log('Project added:', newProject);
+   //   console.log('Project added:', newProject);
 
       allInsideList();
         
-    // return newProject;
+     return  newProject;
 
 }
 
@@ -53,9 +53,9 @@ export function addProjecttoList(projectTitle, projectDetails, id) {
 
 export function allInsideList() { 
    
-   console.log(allProjects);
+  // console.log(allProjects);
    
-  //console.log(allProjects.slice()); 
+    return allProjects;
 
 }
 
@@ -65,63 +65,34 @@ export function totalProjectsNum() {
 } 
 
 export function putinlocalstorage() { 
-    localStorage.setItem('project_List', JSON.stringify(allProjects));     // use return later
-    console.log('Projects saved to local storage:', allProjects);
-    console.log('Projects saved to local storage: cheeeeeeeeeeeeck');
+    return localStorage.setItem('project_List', JSON.stringify(allProjects));     // use return later
+   // console.log('Projects saved to local storage:', allProjects);
+    
 }
 
 
 export function getfromlocalstorage() {
-    // make empty list 
     
     const storedProjects = localStorage.getItem('project_List'); 
     if (storedProjects) {
         const parsedProjects = JSON.parse(storedProjects); 
-           // my projects are now parsed and allproject list is updated with them
-           // i need to use the parsed project values in my list to build, strore and show them on the page
-         allProjects = parsedProjects;
-        console.log('Projects loaded from local storage:', allProjects);
-        console.log('Projects loaded from local storage:', allProjects.length);
-        console.log('Retrieved projects from local storage:', storedProjects);
           
-          
+          parsedProjects.map((proj) => {
+           // console.log(proj)
+           // addProjecttoList already makes and put in list, no need to use makeProject again
+            let justAname =  addProjecttoList(proj.title, proj.details, proj.id);
+            return justAname;
+          });   
 
-        //now use parsed projects that have been parsed and now strings to rebuild project objects
-        allProjects = parsedProjects.map((proj) => {
-            return makeProject(proj.title, proj.details, proj.id);
-        });
+               // this will work too but map is effective here :  
+               // allProjects.forEach((project) => {
+               //   addProjecttoList(project.title, project.details, project.id);
+               //  }); 
 
-        console.log('Reconstructed project objects:', allProjects);
-         // this works well up to here 
-         // then display them on the page ---- continue here 
-        /*
-        for (let i = 0; i < localStorage.length; i++) { 
-            const key = localStorage.key(i);
-            console.log('Local storage key:', key);
-
-            const value = localStorage.getItem(key);
-            console.log('Local storage value:', value);
-            
-        } */
-
-        
-
-        /*
-        allProjects.forEach((project) => {
-            addProjecttoList(project.title, project.details, project.id);
-        }); */
+               // console.log('Reconstructed project objects:', allProjects);
+         
     }
         
     
 }
-  /*  continue here 
-export class RerenderProjects {
-    constructor() {
-        this.projects = allProjects;
-    } 
-    rerender() {
-         
-        // Logic to rerender projects
-    }
-}
-*/
+
