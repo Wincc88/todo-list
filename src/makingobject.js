@@ -1,17 +1,14 @@
 
 
-export function makeProject(projectTitle, projectDetails, id) {
+export function makeProject(projectTitle, projectDetails, id, complete = false, madedate) {
 
-  // console.log({ title, details })
-
-    return { 
-
-        title: projectTitle, 
-        details: projectDetails,
-        id: id || crypto.randomUUID() + "#",  
-        madedate: new Date(),
-
-        };
+  return {
+    title: projectTitle,
+    details: projectDetails,
+    id: id || crypto.randomUUID() + "#",
+    complete: !!complete,
+    madedate: madedate ? new Date(madedate) : new Date(),
+  };
 
 }
 
@@ -20,13 +17,13 @@ export let allProjects = [];
   //console.log(allProjects);
 
 
-export function addProjecttoList(projectTitle, projectDetails, id) {
+export function addProjecttoList(projectTitle, projectDetails, id, complete = false, madedate) {
     
    
     let newProject;
 
     if (!newProject) {
-        newProject = makeProject(projectTitle, projectDetails, id);
+      newProject = makeProject(projectTitle, projectDetails, id, complete, madedate);
     }
 
     
@@ -75,14 +72,14 @@ export function getfromlocalstorage() {
     
     const storedProjects = localStorage.getItem('project_List'); 
     if (storedProjects) {
-        const parsedProjects = JSON.parse(storedProjects); 
-          
-          parsedProjects.map((proj) => {
-           // console.log(proj)
-           // addProjecttoList already makes and put in list, no need to use makeProject again
-            let justAname =  addProjecttoList(proj.title, proj.details, proj.id);
+        const parsedProjects = JSON.parse(storedProjects);
+
+        parsedProjects.map((proj) => {
+            // Reconstruct project preserving id, complete and madedate
+            let justAname = addProjecttoList(proj.title, proj.details, proj.id, proj.complete, proj.madedate);
+           // console.log('Project reconstructed from local storage and added to list:', justAname);
             return justAname;
-          });   
+        });
 
                // this will work too but map is effective here :  
                // allProjects.forEach((project) => {

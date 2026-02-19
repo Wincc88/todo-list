@@ -3,7 +3,7 @@ import { addProjecttoList,  allInsideList, allProjects, totalProjectsNum, putinl
 
 // task ui creation with existing data(object) from getfromlocalstorage -- helper function
 // moved all here from addTask for better clarity
-export function createTaskUI(titlewritten, taskwritten, Intro, totalTasksDiv, progressBar, progressNum) {
+export function createTaskUI(titlewritten, taskwritten, Intro, totalTasksDiv, progressBar, progressNum, complete = false) {
     const editDelDiv = document.createElement('div');
     editDelDiv.id = 'editDelDiv';
     editDelDiv.className = 'editDeleteClass';
@@ -16,7 +16,20 @@ export function createTaskUI(titlewritten, taskwritten, Intro, totalTasksDiv, pr
     
     madepara.textContent = "Created on: ";
     madeDateDiv.appendChild(madepara);
-    paradate.textContent = allProjects[allProjects.length - 1].madedate;
+    // try to find the matching project to get its saved madedate; prefer a preformatted string
+    const projectForDate = allProjects.find(p => p.title === titlewritten && p.details === taskwritten);
+    let dateText = '';
+    if (projectForDate) {
+        if (projectForDate.madedateFormatted) {
+            dateText = projectForDate.madedateFormatted;
+        } else if (projectForDate.madedate) {
+            const dateObj = projectForDate.madedate instanceof Date ? projectForDate.madedate : new Date(projectForDate.madedate);
+            if (!isNaN(dateObj)) {
+                dateText = dateObj.toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
+            }
+        }
+    }
+    paradate.textContent = dateText;
     madeDateDiv.appendChild(paradate);
 
     const checkBoxDiv = document.createElement('div');
@@ -27,6 +40,8 @@ export function createTaskUI(titlewritten, taskwritten, Intro, totalTasksDiv, pr
     checkBtn.type = "checkbox";
     checkBtn.id = "checkedOrNot";
     checkBtn.className = "checkedbtn";
+    // set checkbox state from project data when provided
+    checkBtn.checked = !!complete;
     checkBoxDiv.appendChild(checkBtn);
 
     const snippetDetails = document.createElement('div');
@@ -197,6 +212,18 @@ export function createTaskUI(titlewritten, taskwritten, Intro, totalTasksDiv, pr
         const total = allProjects.length;  // can use totalProjectsNum() too
         const checked = checkedCheckboxes.length;
 
+        if(checkBtn.checked) {
+            complete = true;
+            //console.log('Task marked as complete:', complete, titlewritten, taskwritten);
+        }
+        else {
+            complete = false;
+           // console.log('Task marked as incomplete:', complete, titlewritten, taskwritten);
+        }
+        // update corresponding project object so saved state persists
+        const projectToEdit = allProjects.find(project => project.title === titlewritten && project.details === taskwritten);
+        if (projectToEdit) projectToEdit.complete = checkBtn.checked;
+
         if (total === 0) {
             progressBar.style.width = '0%';
             progressNum.textContent = '';
@@ -318,8 +345,25 @@ export function addTask() {
 
         // Render UI for all existing projects (from localStorage or already in allProjects)
         allProjects.forEach((project) => {
-            createTaskUI(project.title, project.details, Intro, totalTasksDiv, progressBar, progressNum);
+            createTaskUI(project.title, project.details, Intro, totalTasksDiv, progressBar, progressNum, project.complete);
         });
+    
+        // Update progress display on load based on saved `complete` flags
+        const totalOnLoad = allProjects.length;
+        const checkedOnLoad = allProjects.filter(p => p.complete).length;
+
+        if (totalOnLoad === 0) {
+            progressBar.style.width = '0%';
+            progressNum.textContent = '';
+        } else if (totalOnLoad === 1) {
+            const percent = Math.round((checkedOnLoad / totalOnLoad) * 100);
+            progressBar.style.width = percent + '%';
+            progressNum.textContent = `Progress: ${checkedOnLoad} out of ${totalOnLoad} task done.`;
+        } else {
+            const percent = Math.round((checkedOnLoad / totalOnLoad) * 100);
+            progressBar.style.width = percent + '%';
+            progressNum.textContent = `Progress: ${checkedOnLoad} out of ${totalOnLoad} tasks done.`;
+        }  
       
 
 
