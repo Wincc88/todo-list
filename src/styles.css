@@ -9,9 +9,10 @@ body {
 }
 
 #topIntro {
-
+    
     font-size: 24px;
     font-weight: bold;
+    font-family: sans-serif;
          /**margin-bottom: 10px; **/
     margin: 50px;
     text-align: center;
@@ -35,7 +36,7 @@ body {
     height: 40px;
     margin-top: 10px;
     text-align: center;
-    border: 3px solid blueviolet;
+    border-bottom: 1px solid blueviolet;
     padding: 5px;
     background-color: lightcyan;
 }
@@ -43,73 +44,86 @@ body {
 #progressBarDiv {
     width: 100%;
     margin-top: 10px;
+    height: 20px;
     background-color: lightgray;
+    border-bottom: 1px solid lightgray;
+    border-radius: 5px;
 }
 #progressBar {
     width: 1%;
-    height: 30px; 
+    height: 20px; 
     background-color: rgb(43, 181, 43);
+    border-radius: 5px;
 }
 
 #progressNum {
     width: 100%;
     height: 40px;
     text-align: center;
-    border: 2px solid black;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 2px;
     font-size: 20px;
     font-weight: bold;
     color: black;
-    background-color: rgba(0, 0, 255, 0.193);
-    border-radius: 5px;
+    background-color: whitesmoke;
+    /* border: 2px solid black;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 255, 0.193); */
+    
 }
 
 #topDiv {
     font-size: 20px;
-    border: 5px solid purple;
+    border-radius: 5px;
     color: white;
     margin-bottom: 20px;
+    margin-left: 6px;
+    margin-right: 6px;
     background-color:rgb(23, 163, 23);
     text-align: center;
     padding: 10px;
     cursor: pointer;
+    /* border: 5px solid purple; */
 }
 
 #beforeTopdiv {
     
-    border: 2px solid lightcoral;
-    margin-top: 15px;
-    margin-bottom: 15px;
+   /* margin-top: 1px;
+    margin-bottom: 1px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
+   /* border: 2px solid lightcoral; */
 
 }
 
 #inputDetailsDiv, #inputTitleDiv {
     
-    margin-bottom: 10px;
-    margin-top: 10px; 
-    border: 2px solid lightgreen;
-    padding: 5px;
-    margin: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px; 
+   
+   /* margin: 5px; */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 98%;
+  /* border: 2px solid lightgreen; 
+   border-radius: 5px; */
     
 }
 
 #inputDetailsDiv {
-    height: 150px;
+    height: 60px;
+    align-items: normal; /* fills the div box */
 
 }
 
 #inputTitleDiv {
     
-    height: 100px;
+    height: 50px;
+    align-items: flex-start;
+    margin-bottom: 15px;
    
     
 }
@@ -118,8 +132,8 @@ body {
     width: 95%;
     padding: 10px;
     font-size: 16px;
-    background-color: yellow; 
-    border: 2px solid gray;
+   /* background-color: yellow;  */
+    border: 1px solid gray;
     border-radius: 5px;
                                          /** target bigger parent class so it does not clash with other div's textaera 
                                            -- remove textarea from snippet to make it a div  --- so no need  **/
@@ -145,8 +159,9 @@ textarea:focus, #titleInput:focus {
 #editDelDiv {
     margin-top: 10px;
     margin-bottom: 20px;
-    margin-left: 2px;
-    border: 5px solid silver;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-bottom: 1px solid silver;
     padding: 10px;  
     display: flex;
     justify-content: center;
@@ -155,21 +170,21 @@ textarea:focus, #titleInput:focus {
 }
 
 .madeDateClass {
-    font-size: 17px;
     
+    font-size: 17px;
     margin-right: auto;
-    border: 2px solid brown;
+   /* border: 2px solid brown; */
     height: auto;
     width: 195px;
     padding: 5px;
-    cursor: pointer;
+    pointer-events: none;
 }
 
 .checkedbtnClass {
     margin-right: auto;
     margin-left: 10px;
     cursor: pointer;
-    border: 2px solid yellow;
+   /* border: 2px solid yellow; */
 }
 
 #checkedOrNot {
@@ -179,7 +194,7 @@ textarea:focus, #titleInput:focus {
     cursor: pointer;
 }
 #checkedOrNot:checked {
-    box-shadow: 0 0 0 4px lightgreen;
+    box-shadow: 0 0 0 2px greenyellow;
 }
 
 .snippetClass {
@@ -189,9 +204,9 @@ textarea:focus, #titleInput:focus {
     margin-left: 20px;
     margin-right: 20px;
     font-size: 18px;
-    border: 2px solid orange;
+   /* border: 2px solid orange; */
     height: auto;
-    background-color: lightblue;
+   /* background-color: lightblue; */
     overflow-x: auto;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -200,13 +215,13 @@ textarea:focus, #titleInput:focus {
 #paraInSnippetId, #hdivInSnippetId {
     align-items: center;
     display: flex;
-    border: 2px solid pink;
+   /* border: 2px solid pink; */
     margin: 1px;
 }
 
 #titleInfo, #detailsInfo {
     font-size: 16px;
-    width: 100%;
+  /*  width: 100%; */
     height: 50px;
     text-align: center;
     overflow-x: auto;
@@ -214,15 +229,24 @@ textarea:focus, #titleInput:focus {
     -webkit-overflow-scrolling: touch;
     resize: none;
     margin: none;
+    border: 1px solid silver;
+    border-radius: 5px;
+    pointer-events: none;
+    user-select: none;   /* no interactuon with the text in box */
 }
 #titleInfo {
-    background-color: beige;
-    border: 2px solid purple;
+    width: 50%;
+    align-self: center;
+    margin: 0 auto;           /* makes centering work along with align-self: center */
+    background-color: whitesmoke; 
+   /* border: 2px solid purple; */
 }
  #detailsInfo {
-    
-    background-color: yellow;
-    border: 2px solid black;
+    width: 85%;
+    align-self: center;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    /* border: 2px solid black;  */
 }
 
 .editDelDivtoAdd {
@@ -230,7 +254,7 @@ textarea:focus, #titleInput:focus {
     justify-content: center;
     align-items: center;
     margin-left: auto;
-    border: 2px solid yellow;
+   /* border: 2px solid yellow; */
 }
 
 
@@ -240,6 +264,7 @@ textarea:focus, #titleInput:focus {
     margin-top: 10px;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
     
@@ -248,7 +273,8 @@ textarea:focus, #titleInput:focus {
 
 
 #editButton {
-    background-color: rgba(200, 113, 20, 0.76);
+    background-color: #E6BB00;
+    color: black;
     
 }
 #deleteButton {
@@ -332,4 +358,101 @@ textarea:focus, #titleInput:focus {
     cursor: pointer;
     margin-right: 5px;
 
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    #topIntro {
+        margin: 20px;
+        font-size: 20px;
+    }
+
+    #subIntro {
+        font-size: 16px;
+    }
+
+    #titleInfo {
+        width: 70%;
+    }
+
+    #detailsInfo {
+        width: 95%;
+    }
+
+    #titleInput {
+        width: 60%;
+    }
+
+    .parentDivClass {
+        width: 80%;
+        left: 10%;
+        height: auto;
+    }
+
+    .snippetClass {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #topIntro {
+        margin: 10px;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    #subIntro {
+        font-size: 14px;
+    }
+
+    #totalTasksDivId {
+        font-size: 16px;
+    }
+
+    #progressNum {
+        font-size: 16px;
+    }
+
+    #titleInfo {
+        width: 90%;
+    }
+
+    #detailsInfo {
+        width: 95%;
+    }
+
+    #titleInput {
+        width: 95%;
+    }
+
+    #topDiv {
+        font-size: 16px;
+        margin: 5px;
+        padding: 8px;
+    }
+
+    #editButton, #deleteButton {
+        font-size: 14px;
+        padding: 8px 15px;
+        margin-right: 5px;
+    }
+
+    .parentDivClass {
+        width: 95%;
+        left: 2.5%;
+        top: 10px;
+    }
+
+    .snippetClass {
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 14px;
+    }
+
+    .madeDateClass {
+        font-size: 14px;
+        width: 150px;
+    }
 }
