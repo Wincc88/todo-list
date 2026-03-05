@@ -247,4 +247,3 @@ export function createTaskUI(titlewritten, taskwritten, Intro, totalTasksDiv, pr
 
     totalTasksDiv.textContent = totalProjectsNum();
 }
-

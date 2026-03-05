@@ -187,13 +187,13 @@ textarea:focus, #titleInput:focus {
    /* border: 2px solid yellow; */
 }
 
-#checkedOrNot {
+.checkedbtn {
     width: 20px;
     height: 20px;
     margin-right: auto;
     cursor: pointer;
 }
-#checkedOrNot:checked {
+.checkedbtn:checked {
     box-shadow: 0 0 0 2px greenyellow;
 }
 
@@ -219,7 +219,7 @@ textarea:focus, #titleInput:focus {
     margin: 1px;
 }
 
-#titleInfo, #detailsInfo {
+.titleInfoClass, .detailsInfoClass {
     font-size: 16px;
   /*  width: 100%; */
     height: 50px;
@@ -234,14 +234,14 @@ textarea:focus, #titleInput:focus {
     pointer-events: none;
     user-select: none;   /* no interactuon with the text in box */
 }
-#titleInfo {
+.titleInfoClass {
     width: 50%;
     align-self: center;
     margin: 0 auto;           /* makes centering work along with align-self: center */
     background-color: whitesmoke; 
    /* border: 2px solid purple; */
 }
- #detailsInfo {
+ .detailsInfoClass {
     width: 85%;
     align-self: center;
     margin: 0 auto;
@@ -281,7 +281,7 @@ textarea:focus, #titleInput:focus {
     background-color: rgba(218, 27, 27, 0.91);
 }
 
-#editButton:hover, #deleteButton:hover, #checkedOrNot:hover {
+#editButton:hover, #deleteButton:hover, .checkedbtn:hover {
     opacity: 1;
     transform: scale(1.1);
 }
@@ -371,11 +371,11 @@ textarea:focus, #titleInput:focus {
         font-size: 16px;
     }
 
-    #titleInfo {
+    .titleInfoClass {
         width: 70%;
     }
 
-    #detailsInfo {
+    .detailsInfoClass {
         width: 95%;
     }
 
@@ -415,11 +415,11 @@ textarea:focus, #titleInput:focus {
         font-size: 16px;
     }
 
-    #titleInfo {
+    .titleInfoClass {
         width: 90%;
     }
 
-    #detailsInfo {
+    .detailsInfoClass {
         width: 95%;
     }
 
